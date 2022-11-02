@@ -26,9 +26,10 @@ function getLocationKey(searchInput) {
     .then(data => {
             let tempLocationKey = data[0].Key;
             console.log(tempLocationKey);
-            fetchDailyWeatherData(tempLocationKey)
+            fetchFiveDayWeatherData(tempLocationKey)
 
         });
+
 
 }
 
@@ -37,32 +38,26 @@ function getLocationKey(searchInput) {
 
 //#region Daily Weather Data
 //Function to fetch data
-function fetchDailyWeatherData(locationKey) {
+function fetchFiveDayWeatherData(locationKey) {
     let searchString1 = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/";
-    let searchString2 = 
-    fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/126125?apikey=T4G26OC4BtBA4ALgUdtG6ePCqXD60A35&details=true&metric=true`)
+    let searchString2 = "?apikey=T4G26OC4BtBA4ALgUdtG6ePCqXD60A35&details=true&metric=true";
+    let dailyWeatherQuery = searchString1 + locationKey + searchString2;
+    fetch(dailyWeatherQuery)
         .then(res => res.json())
         .then(data => {
-            handleDailyWeatherData(data);
+            //Function is located in region byOversigt
+            handleFiveDayData(data);
+            console.log(data);
         })
 }
-//Manipulate Weather Data
-function handleDailyWeatherData(weatherData) {
-    //Current weather Data
-    console.log("---- Daily weather ----")
-    const weatherDailyObject = weatherData.DailyForecasts[0];
 
-    mineStederData(weatherDailyObject);
-
-    console.log(weatherDailyObject);
-}
 
 //#endregion
 
 //#region Hourly Weather Data
 function fetchHourlyWeatherData() {
     fetch("http://dataservice.accuweather.com/forecasts/v1/hourly/1hour/126125?apikey=T4G26OC4BtBA4ALgUdtG6ePCqXD60A35&details=true&metric=true")
-        .then(res => res.json())
+    .then(res => res.json())
         .then(data => {
             handleHourlyWeatherData(data);
         })
@@ -77,23 +72,44 @@ function handleHourlyWeatherData(weatherData) {
 }
 //#endregion
 
-//Data to frontpage
+//#region frontpage
 
 //Elements from DOM
 const stederListe = document.getElementById("mineStederListe");
 function mineStederData(weatherData) {
 
+}
+
+//#endregion
+
+//#region byOversigt
+
+//DOM elements
+let fiveDayUlEl = document.getElementById("fiveDayOverview");
+
+//Manipulate Weather Data
+function handleFiveDayData(weatherData) {
+    //Current weather Data
+    console.log("---- Daily weather ----")
+    const weatherDailyObject = weatherData;
+
+    for (let i = 0; i < weatherDailyObject.length; i++) {
+
+        let tempForecastObject = weatherDailyObject[i];
+        //Append books to list
+        let tempForecastLi = document.createElement("li");
+        tempForecastLi.appendChild(document.createTextNode(`Book name: ${tempBook5Object.bookName} - Year: ${tempBook5Object.bookYear} - Author: ${tempBook5Object.bookAuthor}`));
+        fiveDayUlEl.append(tempForecastLi);
+
+    }
 
 
 
+    console.log(weatherDailyObject);
+
+    //Change site to by oversigt
+    // window.location.href = "byOversigt.html"
 }
 
 
-
-
-
-
-// fetchDailyWeatherData();
-// fetchHourlyWeatherData();
-
-
+//#endregion
