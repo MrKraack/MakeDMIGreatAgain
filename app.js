@@ -120,7 +120,7 @@ function handleFiveDayData(weatherData) {
 
     //Big cloud image
     let tempCloudImage = document.createElement("i");
-    tempCloudImage.setAttribute("class","fa-solid fa-cloud");
+    tempCloudImage.setAttribute("class","fa-solid fa-cloud fa-6x");
     byOverviewTopSectionEl.append(tempCloudImage);
 
     //Create weather Status text
@@ -228,7 +228,9 @@ function handleFiveDayData(weatherData) {
         let textDate = new Date(currentDate).toString();
         let currentDayText = textDate.slice(0, 3);
 
-        //Create section 
+
+
+        //Create section for entire day
         let tempForecastSection = document.createElement("section");
         tempForecastSection.setAttribute("id",`forecastSection${IDCounter}`)
         fiveDayUlEl.append(tempForecastSection);
@@ -287,6 +289,11 @@ function handleFiveDayData(weatherData) {
         tempForecastRain.setAttribute("id",`forecastRainAmountText${IDCounter}`)
         tempForecastRain.appendChild(document.createTextNode(`${tempForecastObject.Day.Rain.Value} mm`));
         tempDivRainEl.append(tempForecastRain);
+
+        //Create Arrow 
+        let tempArrowSVG = document.createElement("i");
+        tempArrowSVG.setAttribute("class","fa-solid fa-angle-right");
+        tempSectionEl.append(tempArrowSVG);
 
         
 
