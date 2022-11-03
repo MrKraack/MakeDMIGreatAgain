@@ -1,0 +1,172 @@
+body {
+    margin: 0;
+}
+
+#header {
+    display: flex;
+    width: 97%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#invisible {
+    width: 100px;
+ 
+}
+
+
+#Logo {
+    margin-left: 40px;
+    width: 49.76px;
+    height: 78.13px;
+}
+
+#burgerMenu {
+    width: 37.55px;
+    height: 36.08px;
+}
+
+
+
+#background {
+    background-image: url(Assets/cloudBackground.jpg);
+}
+
+#blueBack {
+    background-color: #0C2C83;
+}
+
+#mainContainer {
+    background: linear-gradient(180deg, rgba(47, 76, 150, 0.5) 0%, rgba(94, 120, 186, 0.5) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+:placeholder-shown {
+    color: white;
+}
+
+#userSearchInput {
+    text-align: center;
+    width: 332.58px;
+    height: 50px;
+    background: linear-gradient(180deg, rgba(94, 120, 186, 0.7) 0%, rgba(12, 44, 131, 0.7) 186%);
+    border-radius: 30px;
+    border-style: none;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
+    
+}
+
+#searchSection h2 {
+    text-align: center;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 29.411px;
+    line-height: 150%;
+    letter-spacing: -0.022em;
+    color: #F8F8FB;
+    }
+
+#mineStederListe {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    
+}
+
+#mineSteder h2 {
+    text-align: center;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 150%;
+    letter-spacing: -0.022em;
+    color: #F8F8FB;
+    }
+
+
+
+
+#mineStederListe section {
+    padding: 20px;
+    width: 347.42px;
+    margin: 14px 0px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(94, 120, 186, 0.6) 0%, rgba(47, 76, 150, 0.3) 119%);
+    border-radius: 13.7864px;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
+
+    
+}
+
+#mineStederListe section * {
+    align-items: center;
+   justify-content: center;
+   flex: 1 1 0;
+    
+}
+
+#mineStederListe section div:nth-child(2) {
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+}
+
+#mineStederListe section div:nth-child(3) {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+#mineStederListe section i {
+text-align: center;
+ color: white;
+ 
+}
+
+
+
+#divCloud {
+    align-items: center;
+}
+
+
+#pSteder {
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 700;
+font-size: 15px;
+line-height: 150%;
+letter-spacing: -0.022em;
+color: #F8F8FB;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: white;
+}
+
+span {
+    color: #FFA767;
+}
+
+
+
+
+
