@@ -26,7 +26,7 @@ function getLocationKey(searchInput) {
             console.log(tempLocationKey);
 
             document.cookie = `locationKey=${tempLocationKey}`
-            document.location.href = "byOversigt.html";
+             
             
         });
 
@@ -141,6 +141,11 @@ function handleFiveDayData(weatherData) {
         //Get Temperatur Div
         let tempDivTemperaturEl = document.getElementById(`tempForecastTemperaturDiv${IDCounter}`);
 
+        //Create Max temperature
+        let tempForecastMaxTemp = document.createElement("p");
+        tempForecastMaxTemp.setAttribute("id",`forecastMaxTempText${IDCounter}`)
+        tempForecastMaxTemp.appendChild(document.createTextNode(`H: ${tempForecastObject.Temperature.Maximum.Value}`));
+        tempDivTemperaturEl.append(tempForecastMaxTemp);
 
         //Create Min temperature
         let tempForecastMinTemp = document.createElement("p");
@@ -148,11 +153,6 @@ function handleFiveDayData(weatherData) {
         tempForecastMinTemp.appendChild(document.createTextNode(`L: ${tempForecastObject.Temperature.Minimum.Value}`));
         tempDivTemperaturEl.append(tempForecastMinTemp);
 
-        //Create Max temperature
-        let tempForecastMaxTemp = document.createElement("p");
-        tempForecastMaxTemp.setAttribute("id",`forecastMaxTempText${IDCounter}`)
-        tempForecastMaxTemp.appendChild(document.createTextNode(`H: ${tempForecastObject.Temperature.Maximum.Value}`));
-        tempDivTemperaturEl.append(tempForecastMaxTemp);
 
         //Create Wind Speed 
         let tempForecastWind = document.createElement("p");
