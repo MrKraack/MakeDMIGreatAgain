@@ -83,7 +83,7 @@ function fetchFiveDayWeatherData() {
     let searchString1 = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/";
     let searchString2 = "?apikey=T4G26OC4BtBA4ALgUdtG6ePCqXD60A35&details=true&metric=true";
     let dailyWeatherQuery = searchString1 + locationCookie + searchString2;
-    fetch(dailyWeatherQuery)
+    fetch("/tempData.json")
         .then(res => res.json())
         .then(data => {
             handleFiveDayData(data);
@@ -169,9 +169,9 @@ function handleFiveDayData(weatherData) {
         let tempDivRainEl = document.getElementById(`tempForecastRainDiv${IDCounter}`);
 
         //Create cloud img
-        let tempForecastCloudImg = document.createElement("img");
-        tempForecastCloudImg.src = "Assets/cloud-solid.svg";
-        tempDivRainEl.append(tempForecastCloudImg);
+         let tempIconTest = document.createElement("i");
+         tempIconTest.setAttribute("class","fa-solid fa-cloud");
+        tempDivRainEl.append(tempIconTest);
 
         //Create rain
         let tempForecastRain = document.createElement("p");
