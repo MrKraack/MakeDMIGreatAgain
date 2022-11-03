@@ -6,28 +6,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProjectDMI</title>
     <link rel="stylesheet" href="stylesheet.css">
+    <script src="https://kit.fontawesome.com/6bb3d3020d.js" crossorigin="anonymous"></script>
 </head>
-<body>
-    <div id="mainContainer">
-        <div id="header">
+<body id="background">
+    <div id="blueBack">
+    <main id="mainContainer">
+        <section id="header">
+            <div class="invisible"></div>
             <img id="Logo" src="Assets/DMILogo.png">
-            
+            <img id="burgerMenu" src="Assets/burger.png">
 
-        </div>
-        <div id="searchSection">
+        </section>
+
+        <section id="searchSection">
             <h2>Find dit lokale vejr</h2>
             <input id="userSearchInput" type="text" placeholder="Søg vejr (byer, steder)">
 
-        </div>
-        <div id="mineSteder">
+        </section>
+
+        <section id="mineSteder">
+            <h2>Mine steder</h2>
             <ul id="mineStederListe">
 
+            <section id="mineStederKolding">
+                <p id="pSteder">Kolding</p>
+                <div>
+                    <p>H: <span>16°</span> </p>
+                    <p>L: <span>7°</span> </p>
+                    <p>2 m/s</p>
+                </div>
+                <div id="divCloud">
+                <i class="fa-solid fa-cloud fa-2x"></i>
+                <p>0 mm</p>
+            </div>
+            <i class="fa-sharp fa-solid fa-angle-right"></i>
+                
+            </section>
 
+            <section id="mineStederFredericia" >
+                <p id="pSteder">Fredericia</p>
+                <div>
+                    <p>H: <span>16°</span> </p>
+                    <p>L: <span>7°</span> </p>
+                    <p>2 m/s</p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-cloud fa-2x"></i>
+                    <p>0 mm</p>
+                    </div>
+                    <i class="fa-sharp fa-solid fa-angle-right"></i>
+            </section>
+
+            <section id="mineStederOdense" >
+                <p id="pSteder">Odense</p>
+                <div>
+                    <p>H: <span>16°</span> </p>
+                    <p>L: <span>7°</span> </p>
+                    <p>2 m/s</p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-cloud fa-2x"></i>
+                    <p>0 mm</p>
+                    </div>
+                    <i class="fa-sharp fa-solid fa-angle-right"></i>
+            </section>
+
+            <section id="mineStederVallensbaek" >
+                <p id="pSteder">Vallensbæk</p>
+                <div>
+                    <p>H: <span>16°</span> </p>
+                    <p>L: <span>7°</span> </p>
+                    <p>2 m/s</p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-cloud fa-2x"></i>
+                    <p>0 mm</p>
+                    </div>
+                    <i class="fa-sharp fa-solid fa-angle-right"></i>
+            </section>
+
+            
             </ul>
             
-        </div>
+        </section>
 
-    </div>
+    </main>
+</div>
 
     
     <script src="app.js"></script>
