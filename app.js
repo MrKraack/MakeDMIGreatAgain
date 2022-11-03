@@ -29,7 +29,7 @@ function getLocationKey(searchInput) {
             document.cookie = `locationKey=${tempLocationKey}`;
             document.cookie = `city=${tempCityName}`;
 
-            // document.location.href="byOversigt.html";
+            document.location.href="byOversigt.html";
              
             
         });
@@ -83,7 +83,7 @@ function fetchFiveDayWeatherData() {
     let searchString1 = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/";
     let searchString2 = "?apikey=T4G26OC4BtBA4ALgUdtG6ePCqXD60A35&details=true&metric=true";
     let dailyWeatherQuery = searchString1 + locationCookie + searchString2;
-    fetch("tempData.json")
+    fetch(dailyWeatherQuery)
     .then(res => res.json())
     .then(data => {
         handleFiveDayData(data);
