@@ -340,5 +340,9 @@ function handleFiveDayData(weatherData) {
 
 }
 
+function loadBurgerMenu(){
+    document.location.href = "burgermenu.html"
+}
+
 
 //#endregion
