@@ -5,28 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>By Oversigt</title>
-    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="stylesheet-oversigt.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <script src="https://kit.fontawesome.com/6bb3d3020d.js" crossorigin="anonymous"></script>
 
 
 </head>
 <body onload="fetchFiveDayWeatherData()">
-    <section id="byOverviewMain">
-        <section id="byOverviewTopSection">
+    <header>
+        <i class="fa-solid fa-magnifying-glass fa-2x"></i>
+        <img src="Assets/DMILogo.png" height="70">
+        <i class="fa-solid fa-bars fa-3x"></i>
+    </header>
+    <div id="mainContainer">
+        <section id="byOverviewMain">
 
         </section>
-        <section id="byOverviewUnderSection">
+        <section>
+            <ul id="fiveDayList">
 
+            </ul>
         </section>
-
-    </section>
-    <section>
-        <ul id="fiveDayList">
-
-        </ul>
-    </section>
-
-
+    </div>
     <script src="app.js"></script>
 </body>
 </html>
