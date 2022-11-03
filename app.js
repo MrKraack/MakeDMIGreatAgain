@@ -196,21 +196,21 @@ function handleFiveDayData(weatherData) {
 
       //Create Sun Down section
       let byOverviewSunDownSection = document.createElement("section");
-      byOverviewSunDownSection.setAttribute("id","sunUpSection");
+      byOverviewSunDownSection.setAttribute("id","sunDownSection");
       byOverviewUnderSectionEl.append(byOverviewSunDownSection);
   
       //Create Sun Down Text
       let tempSunDownHeader = document.createElement("h4");
       tempSunDownHeader.setAttribute("id","OverviewSunDownHeader");
       tempSunDownHeader.appendChild(document.createTextNode(`Sol Ned`));
-      byOverviewSunUpSection.append(tempSunDownHeader);
+      byOverviewSunDownSection.append(tempSunDownHeader);
       
       //Create Sun Down Time Data
       let sunDownTimeText = todaysWeatherObject.Sun.Set.substring(11,16);
       let tempSunDownParagraph = document.createElement("p");
-      tempSunDownParagraph.setAttribute("id","overviewSunUpText");    
+      tempSunDownParagraph.setAttribute("id","overviewSunDownText");    
       tempSunDownParagraph.appendChild(document.createTextNode(`${sunDownTimeText}`));
-      byOverviewSunUpSection.append(tempSunDownParagraph);
+      byOverviewSunDownSection.append(tempSunDownParagraph);
     
     
     
