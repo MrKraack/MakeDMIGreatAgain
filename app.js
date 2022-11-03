@@ -93,14 +93,18 @@ function fetchFiveDayWeatherData() {
 //Manipulate Weather Data
 function handleFiveDayData(weatherData) {
 
-    //Weather Data Object
-    let weatherDailyObject = weatherData.DailyForecasts;
+    //Weather Data Array
+    let weatherFiveDayArray = weatherData.DailyForecasts;
+    //Todays weather
+    let todaysWeatherObject = weatherFiveDayArray[0];
     
     //DOM elements
     let fiveDayUlEl = document.getElementById("fiveDayList");
     let byOverviewTopSectionEl = document.getElementById("byOverviewTopSection");
     let byOverviewUnderSectionEl = document.getElementById("byOverviewUnderSection");
     
+    //---- Data to Overview Top Section ----
+
     //Get city name from Cookie
     let cityCookie = document.cookie
     .split('; ')
@@ -108,8 +112,6 @@ function handleFiveDayData(weatherData) {
     ?.split('=')[1];
     console.log(cityCookie)
     
-    //Data to overview main
-
     //Create city title
     let tempCityName = document.createElement("h2");
     tempCityName.setAttribute("id","byOverviewCityName");
@@ -124,13 +126,13 @@ function handleFiveDayData(weatherData) {
     //Create weather Status text
     let tempWeatherStatusText = document.createElement("h2");
     tempWeatherStatusText.setAttribute("id","WeahterStatusText");
-    tempWeatherStatusText.appendChild(document.createTextNode(`${weatherDailyObject[0].Day.IconPhrase}`));
+    tempWeatherStatusText.appendChild(document.createTextNode(`${todaysWeatherObject.Day.IconPhrase}`));
     byOverviewTopSectionEl.append(tempWeatherStatusText);
 
     //Create temperature Text
     let tempOverviewTemperText = document.createElement("h1");
     tempOverviewTemperText.setAttribute("id","overviewTemperaturText");
-    tempOverviewTemperText.appendChild(document.createTextNode(`${weatherDailyObject[0].Temperature.Maximum.Value}°`));
+    tempOverviewTemperText.appendChild(document.createTextNode(`${todaysWeatherObject.Temperature.Maximum.Value}°`));
     byOverviewTopSectionEl.append(tempOverviewTemperText);
 
     //Create Wind Section
@@ -146,22 +148,78 @@ function handleFiveDayData(weatherData) {
     //Create Wind speed
     let tempOverviewWindSpeed = document.createElement("h2");
     tempOverviewWindSpeed.setAttribute("id","overviewWindText");
-    tempOverviewWindSpeed.appendChild(document.createTextNode(`${weatherDailyObject[0].Day.Wind.Speed.Value}m/s`));
+    tempOverviewWindSpeed.appendChild(document.createTextNode(`${todaysWeatherObject.Day.Wind.Speed.Value}m/s`));
     tempWindSection.append(tempOverviewWindSpeed);
 
     //Create Rain amount
     let tempOverviewRainAmount = document.createElement("h3");
     tempOverviewRainAmount.setAttribute("id","overviewRainAmount");
-    tempOverviewRainAmount.appendChild(document.createTextNode(`Nedbør: ${weatherDailyObject[0].Day.Rain.Value} mm`));
+    tempOverviewRainAmount.appendChild(document.createTextNode(`Nedbør: ${todaysWeatherObject.Day.Rain.Value} mm`));
     byOverviewTopSectionEl.append(tempOverviewRainAmount);
+
+    // ---- Data to Overview Bottom Section ----
+
+    //Create Sun up section
+    let byOverviewSunUpSection = document.createElement("section");
+    byOverviewSunUpSection.setAttribute("id","sunUpSection");
+    byOverviewUnderSectionEl.append(byOverviewSunUpSection);
+
+    //Create Sun up Text
+    let tempSunUpHeader = document.createElement("h4");
+    tempSunUpHeader.setAttribute("id","OverviewSunUpHeader");
+    tempSunUpHeader.appendChild(document.createTextNode(`Sol Op`));
+    byOverviewSunUpSection.append(tempSunUpHeader);
+    
+    //Create Sun up Time Data
+    let sunUpTimeText = todaysWeatherObject.Sun.Rise.substring(11,16);
+    let tempSunUpParagraph = document.createElement("p");
+    tempSunUpParagraph.setAttribute("id","overviewSunUpText");    
+    tempSunUpParagraph.appendChild(document.createTextNode(`${sunUpTimeText}`));
+    byOverviewSunUpSection.append(tempSunUpParagraph);
+    
+    //Create UV Index section
+    let byOverviewUVIndexSection = document.createElement("section");
+    byOverviewUVIndexSection.setAttribute("id","sunUVIndexSection");
+    byOverviewUnderSectionEl.append(byOverviewUVIndexSection);
+
+    //Create UV index Text
+    let tempUVIndexHeader = document.createElement("h4");
+    tempUVIndexHeader.setAttribute("id","OverviewUVIndexHeader");
+    tempUVIndexHeader.appendChild(document.createTextNode(`UV index`));
+    byOverviewUVIndexSection.append(tempUVIndexHeader);
+    
+    //Create UV Index Data
+    let UVIndexText = document.createElement("p");
+    UVIndexText.setAttribute("id","overviewUVindexText");    
+    UVIndexText.appendChild(document.createTextNode(`${todaysWeatherObject.AirAndPollen[5].Value}`));
+    byOverviewUVIndexSection.append(UVIndexText);
+
+      //Create Sun Down section
+      let byOverviewSunDownSection = document.createElement("section");
+      byOverviewSunDownSection.setAttribute("id","sunUpSection");
+      byOverviewUnderSectionEl.append(byOverviewSunDownSection);
+  
+      //Create Sun Down Text
+      let tempSunDownHeader = document.createElement("h4");
+      tempSunDownHeader.setAttribute("id","OverviewSunDownHeader");
+      tempSunDownHeader.appendChild(document.createTextNode(`Sol Ned`));
+      byOverviewSunUpSection.append(tempSunDownHeader);
+      
+      //Create Sun Down Time Data
+      let sunDownTimeText = todaysWeatherObject.Sun.Set.substring(11,16);
+      let tempSunDownParagraph = document.createElement("p");
+      tempSunDownParagraph.setAttribute("id","overviewSunUpText");    
+      tempSunDownParagraph.appendChild(document.createTextNode(`${sunDownTimeText}`));
+      byOverviewSunUpSection.append(tempSunDownParagraph);
     
     
     
-    //Data to List items
+    
+    // ---- Data to 5 day overview section ----
     let IDCounter = 1;
-    for (let i = 0; i < weatherDailyObject.length; i++) {
+    for (let i = 0; i < weatherFiveDayArray.length; i++) {
         
-        let tempForecastObject = weatherDailyObject[i];
+        let tempForecastObject = weatherFiveDayArray[i];
         console.log("Testing TempForecast")
         console.log(tempForecastObject);
 
@@ -221,7 +279,7 @@ function handleFiveDayData(weatherData) {
 
         //Create cloud img
          let tempIconTest = document.createElement("i");
-         tempIconTest.setAttribute("class","fa-solid fa-cloud");
+         tempIconTest.setAttribute("class","fa-solid fa-cloud fa-2x");
         tempDivRainEl.append(tempIconTest);
 
         //Create rain
