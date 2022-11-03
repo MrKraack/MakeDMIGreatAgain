@@ -117,7 +117,7 @@ function handleFiveDayData(weatherData) {
     tempCityName.setAttribute("id","byOverviewCityName");
     tempCityName.appendChild(document.createTextNode(`${cityCookie}`));
     byOverviewTopSectionEl.append(tempCityName);
-
+    
     //Big cloud image
     let tempCloudImage = document.createElement("i");
     tempCloudImage.setAttribute("class","fa-solid fa-cloud");
