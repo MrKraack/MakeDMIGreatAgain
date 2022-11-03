@@ -23,9 +23,11 @@ function getLocationKey(searchInput) {
         .then(res => res.json())
         .then(data => {
             let tempLocationKey = data[0].Key;
+            let tempCityName = data[0].LocalizedName;
             console.log(tempLocationKey);
 
-            document.cookie = `locationKey=${tempLocationKey}`
+            document.cookie = `locationKey=${tempLocationKey}`;
+            document.cookie = `city=${tempCityName}`;
              
             
         });
@@ -34,12 +36,6 @@ function getLocationKey(searchInput) {
 }
 
 //#endregion
-
-
-
-
-
-
 
 //#region Hourly Weather Data
 function fetchHourlyWeatherData() {
@@ -79,15 +75,17 @@ function fetchFiveDayWeatherData() {
     .find((row) => row.startsWith('locationKey='))
     ?.split('=')[1];
 
-
+    
+    
+    
     let searchString1 = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/";
     let searchString2 = "?apikey=T4G26OC4BtBA4ALgUdtG6ePCqXD60A35&details=true&metric=true";
     let dailyWeatherQuery = searchString1 + locationCookie + searchString2;
     fetch("/tempData.json")
-        .then(res => res.json())
-        .then(data => {
-            handleFiveDayData(data);
-        })
+    .then(res => res.json())
+    .then(data => {
+        handleFiveDayData(data);
+    })
 }
 
 
@@ -95,21 +93,74 @@ function fetchFiveDayWeatherData() {
 //Manipulate Weather Data
 function handleFiveDayData(weatherData) {
 
+    //Weather Data Object
+    let weatherDailyObject = weatherData.DailyForecasts;
+    
     //DOM elements
     let fiveDayUlEl = document.getElementById("fiveDayList");
-
-    // fiveDayUlEl.innerText = ""; 
-
-    //Current weather Data
-    console.log("---- Daily weather ----")
-    let weatherDailyObject = weatherData.DailyForecasts;
-    console.log(weatherDailyObject);
-
+    let byOverviewTopSectionEl = document.getElementById("byOverviewTopSection");
+    let byOverviewUnderSectionEl = document.getElementById("byOverviewUnderSection");
     
-    let IDCounter = 1;
-    //Data to List items
-    for (let i = 0; i < weatherDailyObject.length; i++) {
+    //Get city name from Cookie
+    let cityCookie = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith('city='))
+    ?.split('=')[1];
+    console.log(cityCookie)
+    
+    //Data to overview main
 
+    //Create city title
+    let tempCityName = document.createElement("h2");
+    tempCityName.setAttribute("id","byOverviewCityName");
+    tempCityName.appendChild(document.createTextNode(`${cityCookie}`));
+    byOverviewTopSectionEl.append(tempCityName);
+
+    //Big cloud image
+    let tempCloudImage = document.createElement("i");
+    tempCloudImage.setAttribute("class","fa-solid fa-cloud");
+    byOverviewTopSectionEl.append(tempCloudImage);
+
+    //Create weather Status text
+    let tempWeatherStatusText = document.createElement("h2");
+    tempWeatherStatusText.setAttribute("id","WeahterStatusText");
+    tempWeatherStatusText.appendChild(document.createTextNode(`${weatherDailyObject[0].Day.IconPhrase}`));
+    byOverviewTopSectionEl.append(tempWeatherStatusText);
+
+    //Create temperature Text
+    let tempOverviewTemperText = document.createElement("h1");
+    tempOverviewTemperText.setAttribute("id","overviewTemperaturText");
+    tempOverviewTemperText.appendChild(document.createTextNode(`${weatherDailyObject[0].Temperature.Maximum.Value}°`));
+    byOverviewTopSectionEl.append(tempOverviewTemperText);
+
+    //Create Wind Section
+    let tempWindSection = document.createElement("section");
+    tempWindSection.setAttribute("id","windSection");
+    byOverviewTopSectionEl.append(tempWindSection);
+
+    //create wind Image
+    let tempWindImg = document.createElement("i");
+    tempWindImg.setAttribute("class","fa-solid fa-wind");
+    tempWindSection.append(tempWindImg);
+    
+    //Create Wind speed
+    let tempOverviewWindSpeed = document.createElement("h2");
+    tempOverviewWindSpeed.setAttribute("id","overviewWindText");
+    tempOverviewWindSpeed.appendChild(document.createTextNode(`${weatherDailyObject[0].Day.Wind.Speed.Value}m/s`));
+    tempWindSection.append(tempOverviewWindSpeed);
+
+    //Create Rain amount
+    let tempOverviewRainAmount = document.createElement("h3");
+    tempOverviewRainAmount.setAttribute("id","overviewRainAmount");
+    tempOverviewRainAmount.appendChild(document.createTextNode(`Nedbør: ${weatherDailyObject[0].Day.Rain.Value} mm`));
+    byOverviewTopSectionEl.append(tempOverviewRainAmount);
+    
+    
+    
+    //Data to List items
+    let IDCounter = 1;
+    for (let i = 0; i < weatherDailyObject.length; i++) {
+        
         let tempForecastObject = weatherDailyObject[i];
         console.log("Testing TempForecast")
         console.log(tempForecastObject);
@@ -124,7 +175,7 @@ function handleFiveDayData(weatherData) {
         tempForecastSection.setAttribute("id",`forecastSection${IDCounter}`)
         fiveDayUlEl.append(tempForecastSection);
         
-        //Get div element
+        //Get section element
         let tempSectionEl = document.getElementById(`forecastSection${IDCounter}`);
         
         //Create Date Text and append to div
