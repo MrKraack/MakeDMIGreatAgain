@@ -285,7 +285,6 @@ function handleFiveDayData(weatherData) {
         let tempForecastMaxTempText = document.createElement("p");
         tempForecastMaxTempText.appendChild(document.createTextNode(`${Math.round(tempForecastObject.Temperature.Maximum.Value)}°`));
 
-
         forecastMaxTempSpan.append(tempForecastMaxTempH);
         tempForecastMaxTempH.append(tempForecastMaxTempText);
 
