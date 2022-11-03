@@ -28,6 +28,8 @@ function getLocationKey(searchInput) {
 
             document.cookie = `locationKey=${tempLocationKey}`;
             document.cookie = `city=${tempCityName}`;
+
+            // document.location.href="byOversigt.html";
              
             
         });
@@ -81,7 +83,7 @@ function fetchFiveDayWeatherData() {
     let searchString1 = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/";
     let searchString2 = "?apikey=T4G26OC4BtBA4ALgUdtG6ePCqXD60A35&details=true&metric=true";
     let dailyWeatherQuery = searchString1 + locationCookie + searchString2;
-    fetch("/tempData.json")
+    fetch("tempData.json")
     .then(res => res.json())
     .then(data => {
         handleFiveDayData(data);
@@ -146,9 +148,10 @@ function handleFiveDayData(weatherData) {
     tempWindSection.append(tempWindImg);
     
     //Create Wind speed
+    let windSpeedCalculated1 = ((5/18)*todaysWeatherObject.Day.Wind.Speed.Value).toString();
     let tempOverviewWindSpeed = document.createElement("h2");
     tempOverviewWindSpeed.setAttribute("id","overviewWindText");
-    tempOverviewWindSpeed.appendChild(document.createTextNode(`${todaysWeatherObject.Day.Wind.Speed.Value}m/s`));
+    tempOverviewWindSpeed.appendChild(document.createTextNode(`${windSpeedCalculated1.slice(0,3)}m/s`));
     tempWindSection.append(tempOverviewWindSpeed);
 
     //Create Rain amount
@@ -228,12 +231,15 @@ function handleFiveDayData(weatherData) {
         let textDate = new Date(currentDate).toString();
         let currentDayText = textDate.slice(0, 3);
 
-
+        //Maing sections clickable
+        let aSection = document.createElement("a");
+        aSection.setAttribute("href","chosenDay.html");
+        fiveDayUlEl.append(aSection);
 
         //Create section for entire day
         let tempForecastSection = document.createElement("section");
         tempForecastSection.setAttribute("id",`forecastSection${IDCounter}`)
-        fiveDayUlEl.append(tempForecastSection);
+        aSection.append(tempForecastSection);
         
         //Get section element
         let tempSectionEl = document.getElementById(`forecastSection${IDCounter}`);
@@ -252,23 +258,39 @@ function handleFiveDayData(weatherData) {
         //Get Temperatur Div
         let tempDivTemperaturEl = document.getElementById(`tempForecastTemperaturDiv${IDCounter}`);
 
+        //Creating Span for text
+        let forecastMaxTempSpan = document.createElement("span");
+        forecastMaxTempSpan.setAttribute("id",`forecastMaxTempText${IDCounter}`)
+        tempDivTemperaturEl.append(forecastMaxTempSpan);
+        
+        
+
         //Create Max temperature
-        let tempForecastMaxTemp = document.createElement("p");
-        tempForecastMaxTemp.setAttribute("id",`forecastMaxTempText${IDCounter}`)
-        tempForecastMaxTemp.appendChild(document.createTextNode(`H: ${tempForecastObject.Temperature.Maximum.Value}`));
-        tempDivTemperaturEl.append(tempForecastMaxTemp);
-
+        let tempForecastMaxTempH = document.createElement("p");
+        tempForecastMaxTempH.setAttribute("class","forecastMaxTemp")
+        tempForecastMaxTempH.appendChild(document.createTextNode(`H:\u00A0`));
+        let tempForecastMaxTempText = document.createElement("p");
+        tempForecastMaxTempText.appendChild(document.createTextNode(` ${tempForecastObject.Temperature.Maximum.Value}`));
+        
+        
+        forecastMaxTempSpan.append(tempForecastMaxTempH);
+        tempForecastMaxTempH.append(tempForecastMaxTempText);
+        
         //Create Min temperature
-        let tempForecastMinTemp = document.createElement("p");
-        tempForecastMinTemp.setAttribute("id",`forecastMinTempText${IDCounter}`)
-        tempForecastMinTemp.appendChild(document.createTextNode(`L: ${tempForecastObject.Temperature.Minimum.Value}`));
-        tempDivTemperaturEl.append(tempForecastMinTemp);
-
+        let tempForecastMinTempL = document.createElement("p");
+        tempForecastMinTempL.setAttribute("class",`forecastMinTempText`)
+        tempForecastMinTempL.appendChild(document.createTextNode(`L:\u00A0`));
+        let tempForecastMinTempText = document.createElement("p");
+        tempForecastMinTempText.appendChild(document.createTextNode(`${tempForecastObject.Temperature.Minimum.Value}`));
+        
+        forecastMaxTempSpan.append(tempForecastMinTempL);
+        tempForecastMinTempL.append(tempForecastMinTempText)
 
         //Create Wind Speed 
+        let windSpeedCalculated2 = ((5/18)*tempForecastObject.Day.Wind.Speed.Value).toString();
         let tempForecastWind = document.createElement("p");
         tempForecastWind.setAttribute("id",`forecastWindSpeedText${IDCounter}`)
-        tempForecastWind.appendChild(document.createTextNode(`${tempForecastObject.Day.Wind.Speed.Value} m/s`));
+        tempForecastWind.appendChild(document.createTextNode(`${windSpeedCalculated2.slice(0,3)} m/s`));
         tempDivTemperaturEl.append(tempForecastWind);
 
         //Create div for rain
