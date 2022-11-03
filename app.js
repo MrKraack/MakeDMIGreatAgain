@@ -148,11 +148,18 @@ function handleFiveDayData(weatherData) {
     tempWindSection.append(tempWindImg);
     
     //Create Wind speed
-    let windSpeedCalculated1 = ((5/18)*todaysWeatherObject.Day.Wind.Speed.Value).toString();
     let tempOverviewWindSpeed = document.createElement("h2");
+    //Converting wind speed from KM/H to m/s
+    let windSpeedCalculated1 = ((5/18)*todaysWeatherObject.Day.Wind.Speed.Value).toString();
+
     tempOverviewWindSpeed.setAttribute("id","overviewWindText");
     tempOverviewWindSpeed.appendChild(document.createTextNode(`${windSpeedCalculated1.slice(0,3)}m/s`));
     tempWindSection.append(tempOverviewWindSpeed);
+
+    //Create Wind direction Image
+    let windDirectionImage = document.createElement("i");
+    windDirectionImage.setAttribute("class","fa-solid fa-arrow-right");
+    tempWindSection.append(windDirectionImage);
 
     //Create Rain amount
     let tempOverviewRainAmount = document.createElement("h3");
@@ -302,8 +309,15 @@ function handleFiveDayData(weatherData) {
         let tempDivRainEl = document.getElementById(`tempForecastRainDiv${IDCounter}`);
 
         //Create cloud img
-         let tempIconTest = document.createElement("i");
-         tempIconTest.setAttribute("class","fa-solid fa-cloud fa-2x");
+        let tempIconTest = document.createElement("i");
+        let currentRainAmount = tempForecastObject.Day.Rain.Value;
+        if(currentRainAmount < 1){
+            tempIconTest.setAttribute("class","fa-solid fa-cloud fa-2x");
+            
+        }else{
+            tempIconTest.setAttribute("class","fa-solid fa-cloud-rain fa-2x");
+        }
+        
         tempDivRainEl.append(tempIconTest);
 
         //Create rain
